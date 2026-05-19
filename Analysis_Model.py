@@ -5,6 +5,7 @@ import seaborn as sns
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+import os
 
 import joblib
 
@@ -34,12 +35,15 @@ print(df['Gender'].value_counts(normalize=True) * 100)
 ### Age statistics
 print(df['Age'].describe())
 
+os.makedirs("Image",exist_ok=True)
+
 #### KDE Plot for Age Distribution
 plt.figure(figsize=(10,6))
 sns.kdeplot(df['Age'], fill=True, color='pink')
 plt.title('Customer Age Profile')
 plt.xlabel('Age')
 plt.ylabel('Density')
+plt.savefig("Image/KDE_plot_age.png")
 plt.show()
 
 ### Annual income (k$) statistics
@@ -51,6 +55,7 @@ sns.kdeplot(df['Annual Income (k$)'],fill=True,color='red')
 plt.title('Annual Income')
 plt.xlabel('Annual')
 plt.ylabel('Density')
+plt.savefig("Image/KDE_plot_annualincome.png")
 plt.show()
 
 ### Spending Score(1-100) statistics
@@ -62,6 +67,7 @@ sns.kdeplot(df['Spending Score (1-100)'],fill=True,color='blue')
 plt.title('Customer score profile')
 plt.xlabel('Spending score')
 plt.ylabel('Density')
+plt.savefig("Image/KDE_plot_spendingscore.png")
 plt.show()
 
 
@@ -73,6 +79,7 @@ sns.boxplot(data=df,y='Age',x='Gender',color='violet')
 plt.title('Age by gender')
 plt.xlabel('Gender')
 plt.ylabel('Age')
+plt.savefig("Image/Box_plot.png")
 plt.show()
 
 ### Annual Income Distribution
@@ -81,6 +88,7 @@ plt.hist(df['Annual Income (k$)'], bins=20, color='skyblue')
 plt.title('Distribution of Annual Income')
 plt.xlabel('Income (k$)')
 plt.ylabel('Frequency')
+plt.savefig("Image/Annual_distribution.png")
 plt.show()
 
 
@@ -126,6 +134,7 @@ plt.plot(range(2, 10), wcss, marker='o')
 plt.title('Elbow Method')
 plt.xlabel('Number of Clusters')
 plt.ylabel('WCSS')
+plt.savefig("Image/elbow.png")
 plt.show()
 
 
@@ -148,6 +157,7 @@ pca_df["Cluster"] = x["Cluster"].values
 
 sns.scatterplot(x="PCA1",y="PCA2",hue="Cluster",data=pca_df,palette="Set1")
 plt.title("customer segmentation (PCA)")
+plt.savefig("Image/clustering.png")
 plt.show()
 
 #### tarin model
